@@ -1,5 +1,6 @@
 // Libraries
 import {Dispatch} from 'redux'
+import _ from 'lodash'
 import {replace} from 'react-router-redux'
 
 // APIs
@@ -233,6 +234,9 @@ export const createDashboardFromTemplate = (
   try {
     await createDashboardFromTemplateAJAX(template, orgID)
 
+    const dashboards = await getDashboardsAJAX()
+
+    dispatch(setDashboards(RemoteDataState.Done, dashboards))
     dispatch(notify(importDashboardSucceeded()))
   } catch (error) {
     dispatch(notify(importDashboardFailed(error)))

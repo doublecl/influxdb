@@ -27,6 +27,7 @@ import DashboardPage from 'src/dashboards/components/DashboardPage'
 import DashboardsIndex from 'src/dashboards/components/dashboard_index/DashboardsIndex'
 import DashboardExportOverlay from 'src/dashboards/components/DashboardExportOverlay'
 import DashboardImportOverlay from 'src/dashboards/components/DashboardImportOverlay'
+import DashboardImportFromTemplateOverlay from 'src/dashboards/components/DashboardImportFromTemplateOverlay'
 import DataExplorerPage from 'src/dataExplorer/components/DataExplorerPage'
 import SaveAsOverlay from 'src/dataExplorer/components/SaveAsOverlay'
 import {MePage, Account} from 'src/me'
@@ -135,6 +136,10 @@ class Root extends PureComponent {
                             component={DashboardImportOverlay}
                           />
                           <Route
+                            path="templates"
+                            component={DashboardImportFromTemplateOverlay}
+                          />
+                          <Route
                             path=":dashboardID/export"
                             component={DashboardExportOverlay}
                           />
@@ -171,6 +176,10 @@ class Root extends PureComponent {
                           <Route
                             path="import"
                             component={TemplateImportOverlay}
+                          />
+                          <Route
+                            path="templates"
+                            component={DashboardImportFromTemplateOverlay}
                           />
                           <Route
                             path=":id/export"
