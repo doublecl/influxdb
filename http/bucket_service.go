@@ -639,7 +639,13 @@ func (s *BucketService) FindBucket(ctx context.Context, filter influxdb.BucketFi
 		return nil, err
 	}
 
-	if n == 0 {
+	if n == 0 && filter.Name != nil && filter.OrganizationID != nil {
+		return nil, &influxdb.Error{
+			Code: influxdb.ENotFound,
+			Op:   s.OpPrefix + influxdb.OpFindBucket,
+			Msg:  fmt.Sprintf(`bucket "%s" not found`, *filter.Name),
+		}
+	} else if n == 0 {
 		return nil, &influxdb.Error{
 			Code: influxdb.ENotFound,
 			Op:   s.OpPrefix + influxdb.OpFindBucket,

@@ -155,7 +155,13 @@ func (s *Service) FindBucket(ctx context.Context, filter platform.BucketFilter) 
 		return nil, err
 	}
 
-	if n < 1 {
+	if n < 1 && filter.Name != nil && filter.OrganizationID != nil {
+		return nil, &platform.Error{
+			Code: platform.ENotFound,
+			Op:   op,
+			Msg:  fmt.Sprintf(`bucket "%s" not found`, *filter.Name),
+		}
+	} else if n < 1 {
 		return nil, &platform.Error{
 			Code: platform.ENotFound,
 			Op:   op,
