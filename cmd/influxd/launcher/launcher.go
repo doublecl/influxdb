@@ -639,6 +639,7 @@ func (m *Launcher) run(ctx context.Context) (err error) {
 		ProtoService:                    protoSvc,
 		DocumentService:                 m.kvService,
 		OrgLookupService:                m.kvService,
+		OrgLimitService:                 m.kvService,
 	}
 
 	// HTTP server
